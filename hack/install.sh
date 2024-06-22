@@ -29,6 +29,9 @@ KO_ARCH=$(go env | grep GOARCH | awk -F\' '{print $2}')
 export KO_FLAGS=${KO_FLAGS:-"--platform=linux/$KO_ARCH"}
 
 source "$(dirname "$0")/../test/e2e-common.sh"
+source "$(dirname "$0")/version-check.sh"
+
+check_kubernetes_version || exit 1
 
 knative_setup || exit $?
 
